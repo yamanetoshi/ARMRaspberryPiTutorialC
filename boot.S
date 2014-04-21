@@ -33,6 +33,45 @@ Start:
 2:
 	cmp	r4, r9
 	blo	1b
+
+	// initialize gpio
+	bl	init_gpio
+
+	// pinMode(22 ,ALT4)
+	ldr	r3, .L2
+	ldr	r2, .L2
+	ldr	r2, [r2]
+	orr	r2, r2, #192
+	str     r2, [r3]
+
+	// pinMode(4, ALT5)
+	ldr	r3, .L2+4
+	ldr	r2, .L2+4
+	ldr	r2, [r2]
+	orr	r2, r2, #8192
+	str     r2, [r3]
+
+	// pinMode(27, ALT4)
+	ldr	r3, .L2
+	ldr	r2, .L2
+	ldr	r2, [r2]
+	orr	r2, r2, #6291456
+	str     r2, [r3]
+
+	// pinMode(25, ALT4)
+	ldr	r3, .L2
+	ldr	r2, .L2
+	ldr	r2, [r2]
+	orr	r2, r2, #98304
+	str     r2, [r3]
+
+	// pinMode(24, ALT4)
+	ldr	r3, .L2
+	ldr	r2, .L2
+	ldr	r2, [r2]
+	orr	r2, r2, #12288
+	str     r2, [r3]
+
  
 	// Call kernel_main
 	ldr	r3, =kernel_main
@@ -42,4 +81,9 @@ Start:
 halt:
 	wfe
 	b	halt
-	
+
+.L3:
+	.align	2
+.L2:
+	.word   538968072
+        .word   538968064
