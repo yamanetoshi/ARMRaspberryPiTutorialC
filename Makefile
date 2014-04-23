@@ -14,7 +14,7 @@ OBJS        += $(patsubst %.c,%.o,$(SOURCES_C))
 
 # Build flags
 DEPENDFLAGS := -MD -MP
-INCLUDES    := -I $(PREFIX)/include
+INCLUDES    := -I $(PREFIX)/include -I rpi_lib
 BASEFLAGS   := -O2 -fpic -pedantic -pedantic-errors -nostdlib
 BASEFLAGS   += -ffreestanding -fomit-frame-pointer -mcpu=arm1176jzf-s
 WARNFLAGS   := -Wall -Wextra -Wshadow -Wcast-align -Wwrite-strings
