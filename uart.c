@@ -10,9 +10,9 @@
 
 #include <peripherals/rpi_peripherals.h>
 #include <gpio/rpi_gpio.h>
- 
+
 enum {
-/*
+/* 
     // The GPIO registers base address.
     GPIO_BASE = 0x20200000,
  
@@ -47,6 +47,30 @@ enum {
     UART0_ITOP   = (UART0_BASE + 0x88),
     UART0_TDR    = (UART0_BASE + 0x8C),
 };
+
+/*
+#define    UART0_BASE  (0x20201000)
+ 
+    // The offsets for reach register for the UART.
+#define    UART0_DR     ((vu32_t *)(UART0_BASE + 0x00))
+#define    UART0_RSRECR ((vu32_t *)(UART0_BASE + 0x04))
+#define    UART0_FR     ((vu32_t *)(UART0_BASE + 0x18))
+#define    UART0_ILPR   ((vu32_t *)(UART0_BASE + 0x20))
+#define    UART0_IBRD   ((vu32_t *)(UART0_BASE + 0x24))
+#define    UART0_FBRD   ((vu32_t *)(UART0_BASE + 0x28))
+#define    UART0_LCRH   ((vu32_t *)(UART0_BASE + 0x2C))
+#define    UART0_CR     ((vu32_t *)(UART0_BASE + 0x30))
+#define    UART0_IFLS   ((vu32_t *)(UART0_BASE + 0x34))
+#define    UART0_IMSC   ((vu32_t *)(UART0_BASE + 0x38))
+#define    UART0_RIS    ((vu32_t *)(UART0_BASE + 0x3C))
+#define    UART0_MIS    ((vu32_t *)(UART0_BASE + 0x40))
+#define    UART0_ICR    ((vu32_t *)(UART0_BASE + 0x44))
+#define    UART0_DMACR  ((vu32_t *)(UART0_BASE + 0x48))
+#define    UART0_ITCR   ((vu32_t *)(UART0_BASE + 0x80))
+#define    UART0_ITIP   ((vu32_t *)(UART0_BASE + 0x84))
+#define    UART0_ITOP   ((vu32_t *)(UART0_BASE + 0x88))
+#define    UART0_TDR    ((vu32_t *)(UART0_BASE + 0x8C))
+*/
  
 /*
  * delay function
@@ -134,4 +158,12 @@ void uart_puts(const char *str) {
     while (*str) {
         uart_putc(*str++);
     }
+}
+
+int is_fifo_enable() {
+	return (mmio_read(UART0_FR) & (1 << 4));
+}
+
+int uart_getc() {
+	return mmio_read(UART0_DR);
 }

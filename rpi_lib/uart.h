@@ -21,5 +21,9 @@ void uart_putc(uint8_t byte);
  * const char *str: 0-terminated string
  */
 void uart_puts(const char *str);
+
+int is_fifo_enable();
+
+int uart_getc();
  
 #endif // #ifndef UART_H
