@@ -56,7 +56,7 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags) {
 */
 			length++;
 
-			if (c == '\r' || '\n') {
+			if (c == '\r' || c == '\n') {
 				break;
 			}
 
@@ -64,8 +64,9 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags) {
 
 		for(i = 0; i < length; i++) {
 			uart_putc(echo[i]);
-			if (echo[i] == '\r')
-				uart_putc('\n');
+// C-a a (at minicom)
+//			if (echo[i] == '\r')
+//				uart_putc('\n');
 		}
 	}
 
